@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
 
 # Create your views here.
 def coupon(request):
@@ -24,4 +25,6 @@ def coupon(request):
             'coupon_deadline':deadline,
             'message':message,
         }
-        return render(request, 'sample/index.html', params)
+        #json形式の文字列を生成
+        json_str = json.dumps(params, ensure_ascii=False, indent=2) 
+        return HttpResponse(json_str)
